@@ -4,6 +4,8 @@ import { Rnd } from 'react-rnd';
 
 import './DaySchedule.css';
 
+const EVENT_WIDTH = 400;
+
 class DaySchedule extends Component {
   static propTypes = {
     date: string,
@@ -25,7 +27,7 @@ class DaySchedule extends Component {
           style={style}
           bounds="parent"
           enableResizing={{ bottom: true }}
-          size={{ width: 200, height: this.state.height }}
+          size={{ width: EVENT_WIDTH, height: this.state.height }}
           position={{ x: this.state.x, y: this.state.y }}
           onDragStop={(e, d) => {
             this.setState({ x: d.x, y: d.y });
