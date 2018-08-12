@@ -1,63 +1,32 @@
 import React, { Component } from 'react';
-import { string, array } from 'prop-types';
-import { Rnd } from 'react-rnd';
+import PropTypes from 'prop-types';
+import ContainerDimensions from 'react-container-dimensions';
 
+import Event from './Event';
 import './DaySchedule.css';
-
-const EVENT_WIDTH = 400;
 
 class DaySchedule extends Component {
   static propTypes = {
-    date: string,
-    events: array.isRequired
-  };
-
-  state = {
-    height: 200,
-    x: 0,
-    y: 0
-  };
-
-  buildGrid = () => {
-    let height = parseInt(this.state.height);
-    let bottomValue = this.state.y + height;
-    return (
-      <div className="calendar_container">
-        <Rnd
-          style={style}
-          bounds="parent"
-          enableResizing={{ bottom: true }}
-          size={{ width: EVENT_WIDTH, height: this.state.height }}
-          position={{ x: this.state.x, y: this.state.y }}
-          onDragStop={(e, d) => {
-            this.setState({ x: d.x, y: d.y });
-          }}
-          onResize={(e, direction, ref, delta, position) => {
-            this.setState({
-              height: ref.style.height,
-              ...position
-            });
-            console.log(ref.style);
-          }}
-        >
-          {'top' + this.state.y}
-          {'bottom' + bottomValue}
-        </Rnd>
-      </div>
-    );
+    date: PropTypes.string,
+    events: PropTypes.array.isRequired
   };
 
   render() {
-    return <div className="container">{this.buildGrid()}</div>;
+    return (
+      <div className="calendar_container">
+        <ContainerDimensions>
+          {({ width, height }) => (
+            <Event
+              slotWidth={50}
+              startPosition={200}
+              width={width}
+              color={'#2ecc71'}
+            />
+          )}
+        </ContainerDimensions>
+      </div>
+    );
   }
 }
-
-const style = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  border: 'solid 1px #ddd',
-  background: '#f0f0f0'
-};
 
 export default DaySchedule;
