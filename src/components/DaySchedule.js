@@ -4,6 +4,7 @@ import ContainerDimensions from 'react-container-dimensions';
 
 import Event from './Event';
 import './DaySchedule.css';
+import { TIME } from '../constants/timeValues';
 
 class DaySchedule extends Component {
   static propTypes = {
@@ -12,13 +13,14 @@ class DaySchedule extends Component {
   };
 
   render() {
+    console.log(TIME[0]);
     return (
       <div className="calendar_container">
         <ContainerDimensions>
           {({ width, height }) => (
             <Event
-              slotWidth={50}
-              startPosition={200}
+              slotWidth={Math.floor(height / 24)}
+              startPosition={0}
               width={width}
               color={'#2ecc71'}
             />

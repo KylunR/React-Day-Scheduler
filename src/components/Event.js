@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Rnd } from 'react-rnd';
 import PropTypes from 'prop-types';
+import { TIME } from '../constants/timeValues';
 
 class Event extends Component {
   static propTypes = {
-    width: PropTypes.number,
     slotWidth: PropTypes.number,
     startPosition: PropTypes.number
   };
@@ -18,9 +18,15 @@ class Event extends Component {
   render() {
     const { width, slotWidth, color } = this.props;
 
-    //For Debugging
-    let height = parseInt(this.state.height, 0);
-    let bottomValue = this.state.y + height;
+    //FIX THIS JUNK
+    let topValue = this.state.y;
+    let bottomValue = topValue + parseInt(this.state.height, 0);
+
+    topValue = Math.floor(topValue / slotWidth);
+    bottomValue = Math.floor(bottomValue / slotWidth);
+
+    let topTime = TIME[topValue].label;
+    let bottomTime = TIME[bottomValue].label;
 
     return (
       <Rnd
@@ -42,8 +48,8 @@ class Event extends Component {
           });
         }}
       >
-        {'top ' + this.state.y + ' '}
-        {'bottom ' + bottomValue + ' '}
+        {'top ' + topTime + ' '}
+        {'bottom ' + bottomTime + ' '}
       </Rnd>
     );
   }
