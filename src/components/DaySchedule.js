@@ -47,7 +47,7 @@ class DaySchedule extends Component {
           {({ width, height }) => (
             <Event
               id={event.id}
-              slotWidth={Math.floor(height / 24)}
+              slotWidth={Math.floor(height / 24)} //need to refactor to slotSize
               startIndex={startIndex}
               endIndex={endIndex}
               width={width}
@@ -63,8 +63,52 @@ class DaySchedule extends Component {
     return eventObjects;
   };
 
+  buildGridLines = height => {
+    let gridLines = [];
+    for (let i = 1; i < 24; i++) {
+      if (i % 2 === 1) {
+        gridLines.push(
+          <ContainerDimensions key={i}>
+            {({ width, height }) => (
+              <div
+                style={{
+                  borderBottom: '2px dashed lightgrey',
+                  width: 'auto',
+                  height: Math.floor(height / 24) - 1 //-1 to account for border of 1px
+                }}
+              />
+            )}
+          </ContainerDimensions>
+        );
+      } else {
+        gridLines.push(
+          <ContainerDimensions key={i}>
+            {({ width, height }) => (
+              <div
+                style={{
+                  borderBottom: '2px solid lightgrey',
+                  width: 'auto',
+                  height: Math.floor(height / 24) - 1 //-1 to account for border of 1px
+                }}
+              />
+            )}
+          </ContainerDimensions>
+        );
+      }
+    }
+    return gridLines;
+  };
+
   render() {
-    return <div className="event_container">{this.buildEvents()}</div>;
+    return (
+      <div className="schedule_container">
+        <div className="time_container">{this.buildGridLines()}</div>
+        <div className="event_container">
+          {this.buildGridLines()}
+          {this.buildEvents()}
+        </div>
+      </div>
+    );
   }
 }
 
