@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import DaySchedule from './components/DaySchedule';
 
-import { date, initialEventData } from './data';
+import { date, events } from './data/eventData';
 
 class App extends Component {
   constructor(props) {
@@ -9,7 +9,7 @@ class App extends Component {
 
     this.state = {
       date,
-      events: initialEventData
+      events
     };
   }
 

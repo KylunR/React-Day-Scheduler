@@ -1,32 +1,52 @@
 import React, { Component } from 'react';
 import { Rnd } from 'react-rnd';
 import PropTypes from 'prop-types';
-import { TIME } from '../constants/timeValues';
+
+import { TIME } from '../data/timeData';
 
 class Event extends Component {
   static propTypes = {
     slotWidth: PropTypes.number,
-    startPosition: PropTypes.number
+    startIndex: PropTypes.number,
+    endIndex: PropTypes.number,
+    width: PropTypes.number,
+    color: PropTypes.string,
+    description: PropTypes.string
   };
 
   state = {
-    height: 100,
-    x: 0,
-    y: this.props.startPosition
+    y: 0,
+    height: 0
+  };
+
+  componentDidMount() {
+    const { startIndex, endIndex, slotWidth } = this.props;
+    let y = startIndex * slotWidth;
+    let height = endIndex * slotWidth - y;
+
+    this.setState({ y, height });
+  }
+
+  getTimeEquivalent = () => {
+    const { slotWidth } = this.props;
+
+    // Get top and bottom pixel locations along y-axis
+    let eventStart = this.state.y;
+    let eventEnd = eventStart + this.state.height;
+
+    // Find slot the pixel values relate to
+    eventStart = Math.floor(eventStart / slotWidth);
+    eventEnd = Math.floor(eventEnd / slotWidth);
+
+    // Find start and end times relating to the slots
+    const startTime = TIME[eventStart];
+    const endTime = TIME[eventEnd];
+    return [startTime, endTime];
   };
 
   render() {
-    const { width, slotWidth, color } = this.props;
-
-    //FIX THIS JUNK
-    let topValue = this.state.y;
-    let bottomValue = topValue + parseInt(this.state.height, 0);
-
-    topValue = Math.floor(topValue / slotWidth);
-    bottomValue = Math.floor(bottomValue / slotWidth);
-
-    let topTime = TIME[topValue].label;
-    let bottomTime = TIME[bottomValue].label;
+    const { width, slotWidth, color, description } = this.props;
+    const eventTime = this.getTimeEquivalent();
 
     return (
       <Rnd
@@ -34,22 +54,23 @@ class Event extends Component {
         bounds="parent"
         dragAxis="y"
         size={{ width, height: this.state.height }}
-        position={{ x: this.state.x, y: this.state.y }}
+        position={{ x: 0, y: this.state.y }}
         enableResizing={{ bottom: true }}
         resizeGrid={[0, slotWidth]}
         onDragStop={(e, d) => {
           let y = d.y - (d.y % slotWidth);
-          this.setState({ x: 0, y });
+          this.setState({ y });
         }}
         onResize={(e, direction, ref, delta, position) => {
           this.setState({
-            height: ref.style.height,
+            height: parseInt(ref.style.height, 0),
             ...position
           });
         }}
       >
-        {'top ' + topTime + ' '}
-        {'bottom ' + bottomTime + ' '}
+        {eventTime[0].label}
+        {eventTime[1].label}
+        {description}
       </Rnd>
     );
   }
