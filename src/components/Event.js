@@ -11,37 +11,59 @@ class Event extends Component {
     endIndex: PropTypes.number,
     width: PropTypes.number,
     color: PropTypes.string,
-    description: PropTypes.string
+    description: PropTypes.string,
+    id: PropTypes.number
   };
 
   state = {
-    y: 0,
-    height: 0
+    startLocation: 0,
+    endLocation: 0
   };
 
   componentDidMount() {
     const { startIndex, endIndex, slotWidth } = this.props;
-    let y = startIndex * slotWidth;
-    let height = endIndex * slotWidth - y;
+    let startLocation = startIndex * slotWidth;
+    let endLocation = endIndex * slotWidth - startLocation;
 
-    this.setState({ y, height });
+    this.setState({ startLocation, endLocation });
   }
 
   getTimeEquivalent = () => {
     const { slotWidth } = this.props;
 
     // Get top and bottom pixel locations along y-axis
-    let eventStart = this.state.y;
-    let eventEnd = eventStart + this.state.height;
+    let startIndex = this.state.startLocation;
+    let endIndex = startIndex + this.state.endLocation;
 
-    // Find slot the pixel values relate to
-    eventStart = Math.floor(eventStart / slotWidth);
-    eventEnd = Math.floor(eventEnd / slotWidth);
+    // Find index the pixel values relate to
+    startIndex = Math.floor(startIndex / slotWidth);
+    endIndex = Math.floor(endIndex / slotWidth);
 
-    // Find start and end times relating to the slots
-    const startTime = TIME[eventStart];
-    const endTime = TIME[eventEnd];
+    // Find start and end times relating to those indices
+    const startTime = TIME[startIndex];
+    const endTime = TIME[endIndex];
+
     return [startTime, endTime];
+  };
+
+  onDragStop = (e, d) => {
+    this.setState({ startLocation: d.y - (d.y % this.props.slotWidth) });
+
+    const eventTime = this.getTimeEquivalent();
+    let eventData = {
+      id: this.props.id,
+      startTime: eventTime[0].iso,
+      endTime: eventTime[1].iso
+    };
+
+    //callback to DaySchedule.js
+    this.props.onDragStop(eventData);
+  };
+
+  onResize = (e, d, ref) => {
+    this.setState({
+      endLocation: parseInt(ref.style.height, 0)
+    });
   };
 
   render() {
@@ -53,20 +75,12 @@ class Event extends Component {
         style={{ style, backgroundColor: color }}
         bounds="parent"
         dragAxis="y"
-        size={{ width, height: this.state.height }}
-        position={{ x: 0, y: this.state.y }}
+        size={{ width, height: this.state.endLocation }}
+        position={{ x: 0, y: this.state.startLocation }}
         enableResizing={{ bottom: true }}
         resizeGrid={[0, slotWidth]}
-        onDragStop={(e, d) => {
-          let y = d.y - (d.y % slotWidth);
-          this.setState({ y });
-        }}
-        onResize={(e, direction, ref, delta, position) => {
-          this.setState({
-            height: parseInt(ref.style.height, 0),
-            ...position
-          });
-        }}
+        onDragStop={(e, d) => this.onDragStop(e, d)}
+        onResize={(e, d, ref) => this.onResize(e, d, ref)}
       >
         {eventTime[0].label}
         {eventTime[1].label}

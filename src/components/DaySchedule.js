@@ -13,14 +13,6 @@ class DaySchedule extends Component {
     events: PropTypes.array.isRequired
   };
 
-  state = {
-    eventObjects: null
-  };
-
-  componentDidMount() {
-    this.buildEvents();
-  }
-
   findIndex = time => {
     for (let i = 0; i < TIME.length; i++) {
       if (time === TIME[i].iso) {
@@ -29,11 +21,17 @@ class DaySchedule extends Component {
     }
   };
 
+  handleDragStop = event => {
+    //Pass to App.js to store update event data in state.
+    this.props.onEventUpdate(event);
+  };
+
   buildEvents = () => {
+    let eventObjects = [];
+
     const { date, events } = this.props;
     const todaysEvents = getTodaysEvents(date, events);
 
-    let eventObjects = [];
     for (let event of todaysEvents) {
       let startTime = event.startTime.split('T').pop();
       let endTime = event.endTime.split('T').pop();
@@ -44,18 +42,19 @@ class DaySchedule extends Component {
         <ContainerDimensions key={event.id}>
           {({ width, height }) => (
             <Event
+              id={event.id}
               slotWidth={Math.floor(height / 24)}
               startIndex={startIndex}
               endIndex={endIndex}
               width={width}
               color={event.color}
               description={event.description}
+              onDragStop={event => this.handleDragStop(event)}
             />
           )}
         </ContainerDimensions>
       );
     }
-
     return eventObjects;
   };
 

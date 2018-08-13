@@ -14,6 +14,6 @@ export const events = [
     startTime: '2018-11-14T06:00:00Z',
     endTime: '2018-11-14T07:00:00Z',
     description: 'Eat food',
-    color: '#2ecc71'
+    color: '#00ffff'
   }
 ];
