@@ -7,7 +7,7 @@ import { getCurrentEvents, findIndex } from '../util';
 import { timeData } from '../data/TimeData';
 import './DaySchedule.css';
 
-const BLOCKS = 24;
+const BLOCKS = 48;
 
 class DaySchedule extends Component {
   static propTypes = {
@@ -69,6 +69,8 @@ class DaySchedule extends Component {
                   borderBottom: '2px dashed lightgrey',
                   width: 'auto',
                   height: Math.floor(height / BLOCKS) - 2, // -2px
+                  padding: 0,
+                  margin: 0,
                   textAlign: 'right'
                 }}
               >
@@ -85,7 +87,9 @@ class DaySchedule extends Component {
                 style={{
                   borderBottom: '2px solid lightgrey',
                   width: 'auto',
-                  height: Math.floor(height / BLOCKS) - 2 // -2px
+                  height: Math.floor(height / BLOCKS) - 2, // -2px
+                  padding: 0,
+                  margin: 0
                 }}
               />
             )}
@@ -107,7 +111,9 @@ class DaySchedule extends Component {
                 style={{
                   borderBottom: '2px dashed lightgrey',
                   width: 'auto',
-                  height: Math.floor(height / BLOCKS) - 2 // -2px
+                  height: Math.floor(height / BLOCKS) - 2,
+                  padding: 0,
+                  margin: 0
                 }}
               />
             )}
@@ -121,7 +127,9 @@ class DaySchedule extends Component {
                 style={{
                   borderBottom: '2px solid lightgrey',
                   width: 'auto',
-                  height: Math.floor(height / BLOCKS) - 2 // -2px
+                  height: Math.floor(height / BLOCKS) - 2, // -2px
+                  padding: 0,
+                  margin: 0
                 }}
               />
             )}

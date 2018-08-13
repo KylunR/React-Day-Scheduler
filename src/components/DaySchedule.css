@@ -1,13 +1,13 @@
 .event_container {
   border: 2px solid lightgrey;
   width: 300px;
-  height:960px;
+  height:1920px;
   position: relative;
 }
 .index_container {
   border: 2px solid lightgrey;
   width: 90px;
-  height:960px;
+  height:1920px;
   position: relative;
 }
 .label_text {

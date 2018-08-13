@@ -84,8 +84,7 @@ class Event extends Component {
       <Rnd
         style={{
           backgroundColor: color,
-          borderRadius: 10,
-          borderWidth: 1
+          borderRadius: 10
         }}
         bounds="parent"
         dragAxis="y"

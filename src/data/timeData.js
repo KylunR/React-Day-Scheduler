@@ -98,5 +98,101 @@ export const timeData = [
   {
     label: '12 pm',
     iso: '12:00:00Z'
+  },
+  {
+    label: '12:30 pm',
+    iso: '12:30:00Z'
+  },
+  {
+    label: '1 pm',
+    iso: '13:00:00Z'
+  },
+  {
+    label: '1:30 pm',
+    iso: '13:30:00Z'
+  },
+  {
+    label: '2 pm',
+    iso: '14:00:00Z'
+  },
+  {
+    label: '2:30 pm',
+    iso: '14:30:00Z'
+  },
+  {
+    label: '3 pm',
+    iso: '15:00:00Z'
+  },
+  {
+    label: '3:30 pm',
+    iso: '15:30:00Z'
+  },
+  {
+    label: '4 pm',
+    iso: '16:00:00Z'
+  },
+  {
+    label: '4:30 pm',
+    iso: '16:30:00Z'
+  },
+  {
+    label: '5 pm',
+    iso: '17:00:00Z'
+  },
+  {
+    label: '5:30 pm',
+    iso: '17:30:00Z'
+  },
+  {
+    label: '6 pm',
+    iso: '18:00:00Z'
+  },
+  {
+    label: '6:30 pm',
+    iso: '18:30:00Z'
+  },
+  {
+    label: '7 pm',
+    iso: '19:00:00Z'
+  },
+  {
+    label: '7:30 pm',
+    iso: '19:30:00Z'
+  },
+  {
+    label: '8 pm',
+    iso: '20:00:00Z'
+  },
+  {
+    label: '8:30 pm',
+    iso: '20:30:00Z'
+  },
+  {
+    label: '9 pm',
+    iso: '21:00:00Z'
+  },
+  {
+    label: '09:30 pm',
+    iso: '21:30:00Z'
+  },
+  {
+    label: '10 pm',
+    iso: '22:00:00Z'
+  },
+  {
+    label: '10:30 pm',
+    iso: '22:30:00Z'
+  },
+  {
+    label: '11 pm',
+    iso: '23:00:00Z'
+  },
+  {
+    label: '11:30 pm',
+    iso: '23:30:00Z'
+  },
+  {
+    label: '11:59 pm',
+    iso: '23:59:Z'
   }
 ];
