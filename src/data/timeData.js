@@ -1,4 +1,4 @@
-export const TIME = [
+export const timeData = [
   {
     label: '12 am',
     iso: '00:00:00Z'

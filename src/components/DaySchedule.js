@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import ContainerDimensions from 'react-container-dimensions';
 
 import Event from './Event';
-import { getTodaysEvents } from '../util';
-import { TIME } from '../data/timeData';
+import { getCurrentEvents, findIndex } from '../util';
+import { timeData } from '../data/TimeData';
 import './DaySchedule.css';
+
+const BLOCKS = 24;
 
 class DaySchedule extends Component {
   static propTypes = {
@@ -13,16 +15,7 @@ class DaySchedule extends Component {
     events: PropTypes.array.isRequired
   };
 
-  findIndex = time => {
-    for (let i = 0; i < TIME.length; i++) {
-      if (time === TIME[i].iso) {
-        return i;
-      }
-    }
-  };
-
   handleDragStop = event => {
-    //Pass to App.js to store update event data in state.
     this.props.onEventUpdate(event);
   };
 
@@ -31,23 +24,24 @@ class DaySchedule extends Component {
   };
 
   buildEvents = () => {
+    const { date, events } = this.props;
     let eventObjects = [];
 
-    const { date, events } = this.props;
-    const todaysEvents = getTodaysEvents(date, events);
+    const currentEvents = getCurrentEvents(date, events);
 
-    for (let event of todaysEvents) {
+    for (let event of currentEvents) {
       let startTime = event.startTime.split('T').pop();
       let endTime = event.endTime.split('T').pop();
-      let startIndex = this.findIndex(startTime);
-      let endIndex = this.findIndex(endTime);
+
+      let startIndex = findIndex(startTime);
+      let endIndex = findIndex(endTime);
 
       eventObjects.push(
         <ContainerDimensions key={event.id}>
           {({ width, height }) => (
             <Event
               id={event.id}
-              slotWidth={Math.floor(height / 24)} //need to refactor to slotSize
+              blockSize={Math.floor(height / BLOCKS)}
               startIndex={startIndex}
               endIndex={endIndex}
               width={width}
@@ -63,9 +57,9 @@ class DaySchedule extends Component {
     return eventObjects;
   };
 
-  buildGridLines = height => {
+  buildSchedulerIndex = () => {
     let gridLines = [];
-    for (let i = 1; i < 24; i++) {
+    for (let i = 1; i < BLOCKS; i++) {
       if (i % 2 === 1) {
         gridLines.push(
           <ContainerDimensions key={i}>
@@ -74,7 +68,46 @@ class DaySchedule extends Component {
                 style={{
                   borderBottom: '2px dashed lightgrey',
                   width: 'auto',
-                  height: Math.floor(height / 24) - 1 //-1 to account for border of 1px
+                  height: Math.floor(height / BLOCKS) - 2, // -2px
+                  textAlign: 'right'
+                }}
+              >
+                <div className="label_text">{timeData[i - 1].label}</div>
+              </div>
+            )}
+          </ContainerDimensions>
+        );
+      } else {
+        gridLines.push(
+          <ContainerDimensions key={i}>
+            {({ width, height }) => (
+              <div
+                style={{
+                  borderBottom: '2px solid lightgrey',
+                  width: 'auto',
+                  height: Math.floor(height / BLOCKS) - 2 // -2px
+                }}
+              />
+            )}
+          </ContainerDimensions>
+        );
+      }
+    }
+    return gridLines;
+  };
+
+  buildEventGridLines = () => {
+    let gridLines = [];
+    for (let i = 1; i < BLOCKS; i++) {
+      if (i % 2 === 1) {
+        gridLines.push(
+          <ContainerDimensions key={i}>
+            {({ width, height }) => (
+              <div
+                style={{
+                  borderBottom: '2px dashed lightgrey',
+                  width: 'auto',
+                  height: Math.floor(height / BLOCKS) - 2 // -2px
                 }}
               />
             )}
@@ -88,7 +121,7 @@ class DaySchedule extends Component {
                 style={{
                   borderBottom: '2px solid lightgrey',
                   width: 'auto',
-                  height: Math.floor(height / 24) - 1 //-1 to account for border of 1px
+                  height: Math.floor(height / BLOCKS) - 2 // -2px
                 }}
               />
             )}
@@ -101,10 +134,10 @@ class DaySchedule extends Component {
 
   render() {
     return (
-      <div className="schedule_container">
-        <div className="time_container">{this.buildGridLines()}</div>
+      <div className="scheduler_container">
+        <div className="index_container">{this.buildSchedulerIndex()}</div>
         <div className="event_container">
-          {this.buildGridLines()}
+          {this.buildEventGridLines()}
           {this.buildEvents()}
         </div>
       </div>

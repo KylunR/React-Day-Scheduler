@@ -1,23 +1,20 @@
-
 .event_container {
   border: 2px solid lightgrey;
   width: 300px;
   height:960px;
   position: relative;
 }
-.time_container {
+.index_container {
   border: 2px solid lightgrey;
-  width: 50px;
+  width: 90px;
   height:960px;
   position: relative;
 }
-
-.schedule_container {
-  display:flex; 
-  flex-direction:row;
+.label_text {
+  padding-right: 10px;
+  padding-top: 10px;
 }
-
-.v1 {
-  border-bottom: 6px solid green;
-  width: 100%
+.scheduler_container {
+  display:flex;
+  flex-direction:row;
 }

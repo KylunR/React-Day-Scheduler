@@ -1,6 +1,4 @@
 export const date = '2018-11-14T08:00:00Z';
-
-// dates are in ISO-8601 format
 export const events = [
   {
     id: 1,
