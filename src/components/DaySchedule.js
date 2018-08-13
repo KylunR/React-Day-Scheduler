@@ -26,6 +26,10 @@ class DaySchedule extends Component {
     this.props.onEventUpdate(event);
   };
 
+  handleResize = event => {
+    this.props.onEventUpdate(event);
+  };
+
   buildEvents = () => {
     let eventObjects = [];
 
@@ -50,6 +54,7 @@ class DaySchedule extends Component {
               color={event.color}
               description={event.description}
               onDragStop={event => this.handleDragStop(event)}
+              onResize={event => this.handleResize(event)}
             />
           )}
         </ContainerDimensions>

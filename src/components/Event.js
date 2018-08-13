@@ -64,6 +64,16 @@ class Event extends Component {
     this.setState({
       endLocation: parseInt(ref.style.height, 0)
     });
+
+    const eventTime = this.getTimeEquivalent();
+    let eventData = {
+      id: this.props.id,
+      startTime: eventTime[0].iso,
+      endTime: eventTime[1].iso
+    };
+
+    //callback to DaySchedule.js
+    this.props.onResize(eventData);
   };
 
   render() {
@@ -77,6 +87,7 @@ class Event extends Component {
         dragAxis="y"
         size={{ width, height: this.state.endLocation }}
         position={{ x: 0, y: this.state.startLocation }}
+        minHeight={slotWidth}
         enableResizing={{ bottom: true }}
         resizeGrid={[0, slotWidth]}
         onDragStop={(e, d) => this.onDragStop(e, d)}
