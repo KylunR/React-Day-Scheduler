@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Rnd } from 'react-rnd';
 import PropTypes from 'prop-types';
+import { FaBars } from 'react-icons/fa';
 
 import { timeData } from '../data/TimeData';
 
@@ -78,7 +79,6 @@ class Event extends Component {
 
   render() {
     const { width, blockSize, color, description } = this.props;
-    const eventTime = this.getTimeEquivalent();
 
     return (
       <Rnd
@@ -96,9 +96,12 @@ class Event extends Component {
         onDragStop={(e, d) => this.onDragStop(e, d)}
         onResize={(e, d, ref) => this.onResize(e, d, ref)}
       >
-        {eventTime[0].label}
-        {eventTime[1].label}
-        {description}
+        <div>
+          <div className="event_text">{description}</div>
+          <div className="event_icon">
+            <FaBars />
+          </div>
+        </div>
       </Rnd>
     );
   }

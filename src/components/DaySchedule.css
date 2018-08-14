@@ -18,3 +18,21 @@
   display:flex;
   flex-direction:row;
 }
+.event_icon {
+  color: white;
+  position:fixed;
+  left: 48%;
+  bottom:0px;
+  transform: scale(.75)
+ 
+}
+
+.event_text {
+  color: white;
+  position: absolute;
+  padding-Left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+ 
+}
+

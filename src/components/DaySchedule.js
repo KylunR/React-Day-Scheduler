@@ -68,7 +68,7 @@ class DaySchedule extends Component {
                 style={{
                   borderBottom: '2px dashed lightgrey',
                   width: 'auto',
-                  height: Math.floor(height / BLOCKS) - 2, // -2px
+                  height: Math.floor(height / BLOCKS) - 2, // -2px for border
                   padding: 0,
                   margin: 0,
                   textAlign: 'right'
@@ -87,7 +87,7 @@ class DaySchedule extends Component {
                 style={{
                   borderBottom: '2px solid lightgrey',
                   width: 'auto',
-                  height: Math.floor(height / BLOCKS) - 2, // -2px
+                  height: Math.floor(height / BLOCKS) - 2, // -2px for border
                   padding: 0,
                   margin: 0
                 }}
@@ -111,7 +111,7 @@ class DaySchedule extends Component {
                 style={{
                   borderBottom: '2px dashed lightgrey',
                   width: 'auto',
-                  height: Math.floor(height / BLOCKS) - 2,
+                  height: Math.floor(height / BLOCKS) - 2, // -2px for border
                   padding: 0,
                   margin: 0
                 }}
@@ -127,7 +127,7 @@ class DaySchedule extends Component {
                 style={{
                   borderBottom: '2px solid lightgrey',
                   width: 'auto',
-                  height: Math.floor(height / BLOCKS) - 2, // -2px
+                  height: Math.floor(height / BLOCKS) - 2, // -2px for border
                   padding: 0,
                   margin: 0
                 }}
