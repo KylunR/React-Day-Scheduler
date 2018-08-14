@@ -17,8 +17,5 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject"
-  },
-  "devDependencies": {
-    "case-sensitive-paths-webpack-plugin": "^2.1.2"
   }
 }
