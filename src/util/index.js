@@ -1,3 +1,4 @@
+import dateFormat from 'dateformat';
 import { timeData } from '../data/TimeData';
 
 export function getCurrentEvents(date, events) {
@@ -26,4 +27,19 @@ export function findIndex(time) {
       return i;
     }
   }
+}
+
+export function formatHeader(date) {
+  // Get YYYY-MM-DD
+  date = date.split('T');
+
+  // Format date to Day, Month Day Year Format
+  date = dateFormat(date[0], 'fullDate');
+
+  // Store first 3 characters of day to match spec
+  let day = date.substring(0, 3);
+  date = date.split(', ');
+
+  let header = day + ', ' + date[1];
+  return header;
 }

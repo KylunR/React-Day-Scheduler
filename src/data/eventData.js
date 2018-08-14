@@ -22,7 +22,7 @@ export const events = [
     color: '#e67e22'
   },
   {
-    id: 3,
+    id: 4,
     startTime: '2018-11-15T16:00:00Z',
     endTime: '2018-11-15T18:00:00Z',
     description: 'Next Day Event',

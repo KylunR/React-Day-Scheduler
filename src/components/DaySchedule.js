@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ContainerDimensions from 'react-container-dimensions';
 
 import Event from './Event';
-import { getCurrentEvents, findIndex } from '../util';
+import { getCurrentEvents, findIndex, formatHeader } from '../util';
 import { timeData } from '../data/TimeData';
 import './DaySchedule.css';
 
@@ -141,12 +141,16 @@ class DaySchedule extends Component {
   };
 
   render() {
+    let header = formatHeader(this.props.date);
     return (
-      <div className="scheduler_container">
-        <div className="index_container">{this.buildSchedulerIndex()}</div>
-        <div className="event_container">
-          {this.buildEventGridLines()}
-          {this.buildEvents()}
+      <div>
+        <div className="date_text">{header}</div>
+        <div className="scheduler_container">
+          <div className="index_container">{this.buildSchedulerIndex()}</div>
+          <div className="event_container">
+            {this.buildEventGridLines()}
+            {this.buildEvents()}
+          </div>
         </div>
       </div>
     );

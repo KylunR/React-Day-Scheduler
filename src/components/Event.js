@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { FaBars } from 'react-icons/fa';
 
 import { timeData } from '../data/TimeData';
+import './Event.css';
 
 class Event extends Component {
   static propTypes = {

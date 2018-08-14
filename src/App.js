@@ -36,7 +36,7 @@ class App extends Component {
   render() {
     const { date, events } = this.state;
     return (
-      <div className="App">
+      <div>
         <DaySchedule
           date={date}
           events={events}
