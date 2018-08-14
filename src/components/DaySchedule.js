@@ -4,7 +4,7 @@ import ContainerDimensions from 'react-container-dimensions';
 
 import Event from './Event';
 import { getCurrentEvents, findIndex, formatHeader } from '../util';
-import { timeData } from '../data/TimeData';
+import { timeData } from '../data/timeData';
 import './DaySchedule.css';
 
 const BLOCKS = 48;

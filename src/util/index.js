@@ -1,5 +1,5 @@
 import dateFormat from 'dateformat';
-import { timeData } from '../data/TimeData';
+import { timeData } from '../data/timeData';
 
 export function getCurrentEvents(date, events) {
   let currentEvents = [];

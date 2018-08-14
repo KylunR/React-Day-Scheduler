@@ -3,7 +3,7 @@ import { Rnd } from 'react-rnd';
 import PropTypes from 'prop-types';
 import { FaBars } from 'react-icons/fa';
 
-import { timeData } from '../data/TimeData';
+import { timeData } from '../data/timeData';
 import './Event.css';
 
 class Event extends Component {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import DaySchedule from './components/DaySchedule';
 
-import { date, events } from './data/EventData';
+import { date, events } from './data/eventData';
 
 class App extends Component {
   state = {
