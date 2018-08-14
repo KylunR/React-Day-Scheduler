@@ -80,7 +80,6 @@ class Event extends Component {
 
   render() {
     const { width, blockSize, color, description } = this.props;
-
     return (
       <Rnd
         style={{
