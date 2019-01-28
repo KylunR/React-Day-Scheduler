@@ -1,5 +1,6 @@
 # React Day Scheduler
 React Day Scheduler is a simple drag-and-drop day scheduler component built in React.
+
 ![](preview.gif)
 
 # Installation 
